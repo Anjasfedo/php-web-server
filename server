@@ -15,8 +15,22 @@ if (empty($argv)) {
 	$port = array_shift($argv);
 }
 
+echo "Server is starting on port $port..." . PHP_EOL;
+
 $server = new Server('127.0.0.1', $port);
 
 $server->listen(function (Request $request) {
-	return new Response('Hewro Worldo');
+    $uri = $request->uri();
+    $method = $request->method();
+
+    // Simple routing logic based on request URI
+    if ($uri === '/') {
+        return new Response('Hello from the root!');
+    } elseif ($uri === '/about' && $method === 'GET') {
+        return new Response('About page content');
+    } elseif ($uri === '/contact' && $method === 'POST') {
+        return new Response('Contact form submitted');
+    } else {
+        return Response::error(404);
+    }
 });

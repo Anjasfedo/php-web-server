@@ -60,7 +60,7 @@ class Response
 
     public static function error( $status )
 	{
-		return new static( "<h1>PHPServer: ".$status." - ".static::$statusCodes[$status]."</h1>", $status );
+		return new static( "<h1>PHP: ".$status." - ".static::$statusCodes[$status]."</h1>", $status );
 	}
 
     protected $status = 200;
