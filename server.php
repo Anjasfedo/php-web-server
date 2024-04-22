@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 
 use Koneksi\Server;
@@ -22,5 +21,5 @@ $server = new Server('127.0.0.1', $port);
 
 // start listening
 $server->listen(function (Request $request) {
-	return new Response('Hello Dude');
+	return new Response('Hewro Worldo');
 });
