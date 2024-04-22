@@ -1,27 +1,26 @@
 #!/usr/bin/env php
-<?php 
-use Acer\Php\Server; 
-use Acer\Php\Request;
-use Acer\Php\Response;
+<?php
+
+use Koneksi\Server;
+use Koneksi\Request;
+use Koneksi\Response;
 
 // we never need the first argument
-array_shift( $argv );
+array_shift($argv);
 
 // the next argument should be the port if not use 80
-if ( empty( $argv ) )
-{
+if (empty($argv)) {
 	$port = 80;
 } else {
-	$port = array_shift( $argv );
+	$port = array_shift($argv);
 }
 
 require 'vendor/autoload.php';
 
 // create a new server instance
-$server = new Server( '127.0.0.1', $port );
+$server = new Server('127.0.0.1', $port);
 
 // start listening
-$server->listen( function( Request $request ) 
-{
-	return new Response( 'Hello Dude' );
+$server->listen(function (Request $request) {
+	return new Response('Hello Dude');
 });

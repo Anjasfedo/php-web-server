@@ -2,7 +2,7 @@
     "name": "acer/php",
     "autoload": {
         "psr-4": {
-            "Acer\\Php\\": "src/"
+            "Koneksi\\": "src/"
         }
     },
     "authors": [
