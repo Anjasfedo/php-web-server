@@ -2,6 +2,8 @@
 
 namespace Koneksi;
 
+use Koneksi\Exception;
+
 class Request
 {
     protected $method = null;
@@ -13,7 +15,7 @@ class Request
     {
         $lines = explode("\n", $header);
 
-        list($method, $uri) = explode("", array_shift($lines));
+        list($method, $uri) = explode(" ", array_shift($lines));
 
         $headers = [];
 
@@ -33,10 +35,15 @@ class Request
     {
         $this->headers = $headers;
         $this->method = strtoupper($method);
-
-        @list($this->uri, $params) = explode("?", $uri);
-
-        parse_str($params, $this->parameters);
+    
+        // Check if $uri contains a query string
+        if (strpos($uri, '?') !== false) {
+            list($this->uri, $params) = explode("?", $uri);
+            parse_str($params, $this->parameters);
+        } else {
+            $this->uri = $uri;
+            $this->parameters = [];
+        }
     }
 
     public function method()

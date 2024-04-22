@@ -1,25 +1,22 @@
+#!/usr/bin/env php
 <?php
 
 use Koneksi\Server;
 use Koneksi\Request;
 use Koneksi\Response;
 
-// we never need the first argument
+require 'vendor/autoload.php';
+
 array_shift($argv);
 
-// the next argument should be the port if not use 80
 if (empty($argv)) {
 	$port = 80;
 } else {
 	$port = array_shift($argv);
 }
 
-require 'vendor/autoload.php';
-
-// create a new server instance
 $server = new Server('127.0.0.1', $port);
 
-// start listening
 $server->listen(function (Request $request) {
 	return new Response('Hewro Worldo');
 });

@@ -58,6 +58,11 @@ class Response
         509 => 'Bandwidth Limit Exceeded'
     ];
 
+    public static function error( $status )
+	{
+		return new static( "<h1>PHPServer: ".$status." - ".static::$statusCodes[$status]."</h1>", $status );
+	}
+
     protected $status = 200;
     protected $body = "";
     protected $headers = [];
@@ -74,6 +79,11 @@ class Response
         $this->header("Content-Type", "text/html; charset=utf-8");
         $this->header("Server", "PHP");
     }
+
+    public function body()
+	{
+		return $this->body;
+	}
 
     public function header($key, $value)
     {
